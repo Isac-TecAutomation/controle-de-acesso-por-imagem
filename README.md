@@ -5,21 +5,21 @@
   . Everaldo Santos (Orientador)
 
 
--> Repositório de arquivos do futuro projeto de extensão controle-de-acesso-por-imagem,
+> Repositório de arquivos do futuro projeto de extensão controle-de-acesso-por-imagem,
   onde visa desenvolver um protótipo de controle de acesso usando IA e processamneto de imagem;
 
--> As etapas de como o sistema irá funcionar ainda precisa ser definido
+> As etapas de como o sistema irá funcionar ainda precisa ser definido
 
 - O QUE SABEMOS:
 
-- > vamos usar a liguagem python para o processamento dos dados da imagens
+  > vamos usar a liguagem python para o processamento dos dados da imagens
   > o dados da imagem e o controle de usuario será feito usando
     um banco de dados (possivelmente NOSQL)
   
   > Haverá uma etapa de pré-procesamento onde será possivel indentificar
     possiveis fraudes como o uso do celular para reproduzir um rosto
 
- > No python usaremos as seguintes libs (atualmente):
+- No python usaremos as seguintes libs (atualmente):
 
    . OPENCV
    . NUMPY 

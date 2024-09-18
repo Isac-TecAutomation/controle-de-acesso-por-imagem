@@ -2,8 +2,8 @@
 
 - AUTORES:
 - 
-  . Isac Euegnio da Silva Santos (Discente)
-  . Everaldo Santos (Orientador)
+  - Isac Euegnio da Silva Santos (Discente)
+  - Everaldo Santos (Orientador)
   
 > Repositório de arquivos do futuro projeto de extensão controle-de-acesso-por-imagem,
   onde visa desenvolver um protótipo de controle de acesso usando IA e processamneto de imagem;
@@ -21,10 +21,10 @@
 
 - No python usaremos as seguintes libs (atualmente):
 
-   - . OPENCV
-   - . NUMPY 
-   - . MATPLOTLIB
-   - . FLASK (TALVEZ)
-   - . MONGO (NOSQL)
+   - OPENCV
+   - NUMPY 
+   - MATPLOTLIB
+   - FLASK (TALVEZ)
+   - MONGO (NOSQL)
 
  > As plataformas usadas são a Pycharm e Google Colab

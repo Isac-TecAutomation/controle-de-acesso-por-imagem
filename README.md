@@ -4,11 +4,11 @@
   
   - Isac Euegnio da Silva Santos (Discente)
   - Everaldo Santos (Orientador)
-  
-> Repositório de arquivos do futuro projeto de extensão controle-de-acesso-por-imagem,
+- OBJETIVO E METODOLOGIA:
+  > Repositório de arquivos do futuro projeto de extensão controle-de-acesso-por-imagem,
   onde visa desenvolver um protótipo de controle de acesso usando IA e processamneto de imagem;
 
-> As etapas de como o sistema irá funcionar ainda precisa ser definido
+  > As etapas de como o sistema irá funcionar ainda precisa ser definido
 
 - O QUE SABEMOS:
 

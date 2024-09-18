@@ -2,9 +2,11 @@
 
 - AUTORES:
   
-  - Isac Euegnio da Silva Santos (Discente)
+  - Isac Eugenio/ Isac Tecautomation - Discente)
   - Everaldo Santos (Orientador)
+    
 - OBJETIVO E METODOLOGIA:
+- 
   > Repositório de arquivos do futuro projeto de extensão controle-de-acesso-por-imagem,
   onde visa desenvolver um protótipo de controle de acesso usando IA e processamneto de imagem;
 

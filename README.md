@@ -1,7 +1,7 @@
 #            controle-de-acesso-por-imagem
 
 - AUTORES:
-- 
+  
   - Isac Euegnio da Silva Santos (Discente)
   - Everaldo Santos (Orientador)
   

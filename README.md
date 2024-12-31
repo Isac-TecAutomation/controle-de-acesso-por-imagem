@@ -14,12 +14,17 @@ O **Controle de Acesso por Imagem** é um sistema que utiliza inteligência arti
 
 - **Python 3.9+**: Linguagem principal do projeto.
 - **Docker (opcional)**: Para criação de contêineres e ambiente isolado (versão 27.4.1).
-- **Bibliotecas**: 
-  - OpenCV
-  - NumPy
-  - Matplotlib
-  - Flask (possivelmente)
-  - MongoDB (possivelmente)
+- **mysql**: SGDB de banco dados responsável pelo gerenciamento dinâmico de dados
+- **phpmyadmin (opcional)**: interface para gerenciar o SGDB mysql
+
+## Biblotecas utilizadas no python
+
+- **mysql-conector-python**: Bibloteca para conexão e manipulação do banco de dados (mysql)
+- **face-recognition**: Bibloteca responsável pela detectação e autenticação facial por meio de 
+inteligência artificial
+- **opencv-python**: Bibloteca para o processamento de imagens no python
+- **flask**: para criação de um servidor e conexão da API na rede de comunicação
+
 
 ## Pré-requisitos
 
@@ -32,7 +37,7 @@ Antes de iniciar, certifique-se de ter as seguintes ferramentas instaladas em se
 - Docker e suas dependências (opcional).
 
 ### Observações:
-- Este tutorial foi testado apenas em sistemas Linux com interface GNOME.
+- Este tutorial foi testado em sistemas Linux com interface GNOME e KDE.
 - **Problemas conhecidos**: Em sistemas Linux com interface KDE, podem ocorrer erros na instalação de dependências.
 
 ## Instalação
@@ -60,3 +65,20 @@ sudo apt update -y && sudo apt install -y \
     libjpeg-dev \
     libpng-dev
   ```
+  
+  ## passo 2: criação de um ambiente virtual python (venv) e instalação das biblotecas necessárias
+
+  1- crie uma pasta para criação do ambiente antes de executar o comando abaixo e se redirecione para tal:
+
+  ´´´bash mkdir <nome-para-pasta-do-seu--projeto> && cd <nome-para-pasta-do-seu--projeto>´´´
+   
+  2- Após isso crie um ambiente virtual python para a instalação correta e segura das biblotecas para
+  o projeto:
+  
+  ´´´bash python3 -m venv <nome-do-seu-ambiente>´´´
+
+  3- clone o arquivo requirements.txt e execute com pip para instalar as biblotecas python do projeto:
+
+  ´´´bash curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/requirements.txt?token=GHSAT0AAAAAAC4DZWF24EIYL6RV2IMXLYO4Z3TKPNA ´´´
+
+  

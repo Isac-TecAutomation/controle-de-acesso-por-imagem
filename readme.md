@@ -28,6 +28,21 @@ Certifique-se de ter instalado em sua máquina:
 - houve problemas na instalação das depedencias em sistema linux com interface KDE
 
 1. instale as depedências necessárias:
-  ```bash sudo apt update -y && sudo apt install -y cmake python3-pip python3-dev apt-utils libgl1-mesa-glx ```
+  ```bash sudo apt update -y && sudo apt install -y build-essential \
+    cmake \
+    python3-pip \
+    python3-dev \
+    libboost-python-dev \
+    libboost-system-dev \
+    libboost-thread-dev \
+    libboost-filesystem-dev \
+    apt-utils \
+    libgl1-mesa-glx \
+    libx11-dev \
+    libopenblas-dev \
+    liblapack-dev \
+    libjpeg-dev \
+    libpng-dev
+ ```
 
   

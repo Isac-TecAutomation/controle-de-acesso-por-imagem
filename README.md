@@ -80,11 +80,15 @@ sudo apt update -y && sudo apt install -y \
    python3 -m venv <nome-do-seu-ambiente>
    ```
 
-3. Clone o arquivo `requirements.txt` e execute com `pip` para instalar as bibliotecas Python do projeto:
+3. Clone o arquivo `requirements.txt`:
 
    ```bash
    curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/requirements.txt?token=GHSAT0AAAAAAC4DZWF3Y5GYEGXUFYVFHN2QZ3TK4ZA
    ```
+
+
+4. execute por meio do pip o arquivo `requirements.txt`:
+
    ```bash
    pip install -r requirements.txt
    ```

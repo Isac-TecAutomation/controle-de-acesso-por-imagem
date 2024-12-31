@@ -1,2 +1,12 @@
 /venv
-/exemplos
+/exemplos/__pycache__
+/exemplos/static
+/exemplos/templates
+/exemplos/simples
+/exemplos/comandos_original.py 
+/exemplos/Dockerfile
+/exemplos/main.py
+/exemplos/cabeçalho
+/exemplos/comandos.py
+/exemplos/simples reconhecimento facial/comandos.py
+/exemplos/simples reconhecimento facial/__pycache__

@@ -92,3 +92,9 @@ sudo apt update -y && sudo apt install -y \
    ```bash
    pip install -r requirements.txt
    ```
+
+5. clone o arquivo `comandos.py`:
+ 
+   ```bash
+   curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/comandos.py?token=GHSAT0AAAAAAC4DZWF2HW2BQVYK4FB5KFVUZ3TLGIA
+   ```

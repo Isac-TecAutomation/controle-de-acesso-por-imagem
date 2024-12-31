@@ -70,15 +70,14 @@ sudo apt update -y && sudo apt install -y \
 
   1- crie uma pasta para criação do ambiente antes de executar o comando abaixo e se redirecione para tal:
 
-  ´´´bash mkdir <nome-para-pasta-do-seu--projeto> && cd <nome-para-pasta-do-seu--projeto>´´´
+  ```bash mkdir <nome-para-pasta-do-seu--projeto> && cd <nome-para-pasta-do-seu--projeto>```
    
   2- Após isso crie um ambiente virtual python para a instalação correta e segura das biblotecas para
   o projeto:
   
-  ´´´bash python3 -m venv <nome-do-seu-ambiente>´´´
+  ```bash python3 -m venv <nome-do-seu-ambiente>```
 
   3- clone o arquivo requirements.txt e execute com pip para instalar as biblotecas python do projeto:
 
-  ´´´bash curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/requirements.txt?token=GHSAT0AAAAAAC4DZWF24EIYL6RV2IMXLYO4Z3TKPNA ´´´
+  ```bash curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/requirements.txt?token=GHSAT0AAAAAAC4DZWF24EIYL6RV2IMXLYO4Z3TKPNA ```
 
-  

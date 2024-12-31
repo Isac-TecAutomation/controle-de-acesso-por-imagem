@@ -22,6 +22,8 @@ Certifique-se de ter instalado em sua máquina:
 - Sistema operacional Linux (recomendado).
 - Pip (gerenciador de pacotes do Python).
 - cmake e suas dependências (caso não estiver instalado siga o tutorial abaixo)
+- docker e suas dependências(opcional)
+
 ## Instalação
 
 - observação: o tutorial testado apenas numa interface linux (gnome)

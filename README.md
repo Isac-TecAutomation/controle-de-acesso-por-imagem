@@ -1,4 +1,3 @@
-```markdown
 # Controle de Acesso por Imagem
 
 ## Descrição do Projeto

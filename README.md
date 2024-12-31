@@ -1,3 +1,4 @@
+```markdown
 # Controle de Acesso por Imagem
 
 ## Descrição do Projeto
@@ -14,17 +15,15 @@ O **Controle de Acesso por Imagem** é um sistema que utiliza inteligência arti
 
 - **Python 3.9+**: Linguagem principal do projeto.
 - **Docker (opcional)**: Para criação de contêineres e ambiente isolado (versão 27.4.1).
-- **mysql**: SGDB de banco dados responsável pelo gerenciamento dinâmico de dados
-- **phpmyadmin (opcional)**: interface para gerenciar o SGDB mysql
+- **MySQL**: Sistema de gerenciamento de banco de dados (SGDB) responsável pelo gerenciamento dinâmico de dados.
+- **phpMyAdmin (opcional)**: Interface para gerenciar o SGDB MySQL.
 
-## Biblotecas utilizadas no python
+## Bibliotecas Utilizadas no Python
 
-- **mysql-conector-python**: Bibloteca para conexão e manipulação do banco de dados (mysql)
-- **face-recognition**: Bibloteca responsável pela detectação e autenticação facial por meio de 
-inteligência artificial
-- **opencv-python**: Bibloteca para o processamento de imagens no python
-- **flask**: para criação de um servidor e conexão da API na rede de comunicação
-
+- **mysql-connector-python**: Biblioteca para conexão e manipulação do banco de dados (MySQL).
+- **face-recognition**: Biblioteca responsável pela detecção e autenticação facial por meio de inteligência artificial.
+- **opencv-python**: Biblioteca para o processamento de imagens no Python.
+- **flask**: Para criação de um servidor e conexão da API na rede de comunicação.
 
 ## Pré-requisitos
 
@@ -36,7 +35,8 @@ Antes de iniciar, certifique-se de ter as seguintes ferramentas instaladas em se
 - CMake e suas dependências (siga o tutorial abaixo, se necessário).
 - Docker e suas dependências (opcional).
 
-### Observações:
+### Observações
+
 - Este tutorial foi testado em sistemas Linux com interface GNOME e KDE.
 - **Problemas conhecidos**: Em sistemas Linux com interface KDE, podem ocorrer erros na instalação de dependências.
 
@@ -45,6 +45,7 @@ Antes de iniciar, certifique-se de ter as seguintes ferramentas instaladas em se
 Siga os passos abaixo para configurar o projeto em sua máquina:
 
 ### Passo 1: Atualizar e instalar dependências
+
 Execute o comando abaixo para instalar todas as dependências necessárias para o projeto:
 
 ```bash
@@ -64,20 +65,27 @@ sudo apt update -y && sudo apt install -y \
     liblapack-dev \
     libjpeg-dev \
     libpng-dev
-  ```
-  
-  ## passo 2: criação de um ambiente virtual python (venv) e instalação das biblotecas necessárias
+```
 
-  1- crie uma pasta para criação do ambiente antes de executar o comando abaixo e se redirecione para tal:
+### Passo 2: Criação de um ambiente virtual Python (venv) e instalação das bibliotecas necessárias
 
-  ```bash mkdir <nome-para-pasta-do-seu--projeto> && cd <nome-para-pasta-do-seu--projeto>```
+1. Crie uma pasta para o projeto e entre nela:
    
-  2- Após isso crie um ambiente virtual python para a instalação correta e segura das biblotecas para
-  o projeto:
-  
-  ```bash python3 -m venv <nome-do-seu-ambiente>```
+   ```bash
+   mkdir <nome-para-pasta-do-seu-projeto> && cd <nome-para-pasta-do-seu-projeto>
+   ```
 
-  3- clone o arquivo requirements.txt e execute com pip para instalar as biblotecas python do projeto:
+2. Crie um ambiente virtual Python para a instalação correta e segura das bibliotecas para o projeto:
 
-  ```bash curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/requirements.txt?token=GHSAT0AAAAAAC4DZWF24EIYL6RV2IMXLYO4Z3TKPNA ```
+   ```bash
+   python3 -m venv <nome-do-seu-ambiente>
+   ```
 
+3. Clone o arquivo `requirements.txt` e execute com `pip` para instalar as bibliotecas Python do projeto:
+
+   ```bash
+   curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/requirements.txt?token=GHSAT0AAAAAAC4DZWF3Y5GYEGXUFYVFHN2QZ3TK4ZA
+   ```
+   ```bash
+   pip install -r requirements.txt
+   ```

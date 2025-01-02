@@ -99,3 +99,4 @@ sudo apt update -y && sudo apt install -y \
    curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/comandos.py?token=GHSAT0AAAAAAC4DZWF2HW2BQVYK4FB5KFVUZ3TLGIA
    ```
 
+6. pronto! Agora basta seguir o passo a passo dos exemplos para poder usufruir da bibloteca

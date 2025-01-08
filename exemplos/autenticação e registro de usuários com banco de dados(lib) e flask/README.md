@@ -66,14 +66,14 @@ O Flask é usado para criar uma API simples que expõe dois endpoints principais
 ### **1. Autenticação de Usuários**
 
 - **Endpoint**: `/face_verify`  
-- **Método HTTP**: `GET` #recomendado POST   
+- **Método HTTP**: `GET` #recomendado POST  
 - **Descrição**:  
-  Este endpoint recebe uma imagem facial capturada e compara seu encoding com os encodings registrados no arquivo JSON.
+  Este endpoint recebe uma imagem facial capturada e compara seu encoding com os encodings registrados no banco de dados.
 
 - **Funcionamento**:
-  1. O sistema carrega o arquivo JSON com os dados dos usuários registrados.
-  2. A imagem facial enviada é processada, e seu encoding é extraído.
-  3. O encoding é comparado com os registros no arquivo JSON.
+  1. O sistema acessa o banco de dados configurado, onde estão armazenados os dados dos usuários registrados.
+  2. A imagem facial capturada é processada, e seu encoding é extraído.
+  3. O encoding é comparado com os registros no banco de dados.
   4. Resultado:
      - **Sucesso**: Retorna as informações do usuário correspondente.
      - **Erro**: Retorna uma mensagem indicando que o rosto não foi identificado.

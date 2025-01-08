@@ -23,5 +23,5 @@
 **/exemplos produção/
 **/exemplos/main.py
 # Ignorar arquivo específico
-/comando_001s.py
-/comandos_002.py
+/comandos-1.0.1.py
+/comandos-1.0.3.py

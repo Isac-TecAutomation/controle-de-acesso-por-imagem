@@ -210,7 +210,7 @@ class Database:
             cursor.close()  # Fecha o cursor
             conn.close()  # Fecha a conexão com o banco
 
-    def save_historic(self, user_data, device_data, table, date_column, time_column):
+    def save_historic(self, user_data, device_data, table, date_column, time_column, timerzone):
         """
         Salva um registro histórico com dados do usuário e do dispositivo.
 
@@ -228,8 +228,8 @@ class Database:
         cursor = conn.cursor()  # Cria o cursor
 
         try:
-            timezone = pytz.timezone('America/Belem')
-            now = datetime.now(timezone)  # Obtém a data e hora atual
+         
+            now = datetime.now(pytz.timezone(timerzone))  # Obtém a data e hora atual
             combined_data = {
                 date_column: now.strftime('%Y-%m-%d'),
                 time_column: now.strftime('%H:%M:%S'),
@@ -498,7 +498,8 @@ class Commands:
 
         return result(device_data)
 
-    def save_historic_data(self, user_data, device_data, table, date_column, time_column):
+    def save_historic_data(self, user_data, device_data, table,
+                            date_column, time_column, timerzone):
         """
         Salva os dados históricos de autenticação no banco de dados.
         :param user_data: Dados do usuário autenticado.
@@ -511,7 +512,7 @@ class Commands:
         db = Database(host=self.host_database, user=self.user_database, password=self.password,
                       database=self.database_name)
 
-        save = db.save_historic(user_data, device_data, table, date_column, time_column)
+        save = db.save_historic(user_data, device_data, table, date_column, time_column, timerzone)
 
         return save
 

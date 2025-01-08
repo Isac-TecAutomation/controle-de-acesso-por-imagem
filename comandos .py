@@ -695,3 +695,181 @@ class Commands:
             return True, 'Rosto registrado com sucesso'
         except Exception as e:
             return False, f'Erro ao gravar arquivo JSON: {str(e)}'
+    
+    def get_client(self,archive_json, key_encoding):
+        """
+        Tenta carregar os dados dos usuários a partir de um arquivo JSON e extrair as informações necessárias.
+        
+        :param archive_json: Caminho para o arquivo JSON contendo os dados dos usuários.
+        :param key_encoding: Chave correspondente ao encoding da face.
+        :return: Dados do cliente, incluindo a lista de encodings e informações do usuário.
+        """
+
+        list_data = []
+
+        try:
+            # Tenta abrir e carregar o arquivo JSON com os dados dos usuários
+            with open(archive_json, 'r') as file:
+                try:
+                    data = json.load(file)
+
+                    # Verifica se o arquivo JSON está vazio
+                    if not data:
+                        return {
+                            "message": "Lista de Usuarios vazia",
+                            "success": False,
+                            "results": []
+                        }
+                    else:
+                        # Para cada usuário no arquivo JSON, filtra os dados e os encodings das faces
+                        for data_users in data:
+                            filter_json = {key: value for key, value in data_users.items() 
+                                        if value != '' and key != key_encoding}
+                            
+                            list_data.append({"data": filter_json, "encoding": 
+                                            data_users[key_encoding]})
+                        
+                        return {
+                            "message": "Coleta realizada com sucesso !",
+                            "success": True,
+                            "results": list_data
+                        }
+
+                except (json.JSONDecodeError, ValueError):
+                    # Se o arquivo JSON estiver vazio ou inválido, retorna erro
+                    return {
+                        "message": "Arquivo invalido ou Vazio",
+                        "success": False,
+                        "results": []
+                    }
+        
+        except FileNotFoundError:
+            # Se o arquivo JSON não for encontrado, retorna erro
+            return {
+                "message": "Arquivo não encontrado",
+                "success": False,
+                "results": []
+            }
+            
+        except Exception as e:
+            # Se houver erro ao carregar o arquivo JSON, retorna mensagem de erro
+            return {
+                "message": f"Erro ao carregar arquivo JSON: {str(e)}",
+                "success": False,
+                "results": []
+            }
+   
+    def face_verify_json_image(self, trust_threshold):
+        """
+        Verifica rostos em um frame capturado pela webcam, comparando com os encodings dos rostos 
+        registrados no arquivo JSON.
+
+        :param trust_threshold: float - Limite de confiança para a verificação de correspondência facial.
+        :return: tuple - Lista de resultados de verificação de rostos e o frame anotado.
+        """
+        # Captura a imagem (matriz de pixels) e o frame da webcam
+        image, frame = Webcam(self.host_webcam).image()
+
+        # Obtém os encodings do arquivo JSON. Cada encoding representa características faciais únicas.
+        response = self.get_client(key_encoding=self.image_column, 
+                                archive_json=self.dir_archive_json)
+
+        # Verifica se houve sucesso na obtenção dos dados do JSON
+        if not response["success"]:
+            # Retorna a mensagem de erro caso a leitura do JSON tenha falhado
+            return {"message": response["message"], "success": False}
+
+        # Armazena os encodings extraídos do JSON
+        encoding_json = response["results"]
+
+        # Detecta localizações dos rostos na imagem capturada
+        face_locations = fr.face_locations(image)
+
+        # Extrai os encodings dos rostos detectados, baseando-se nas localizações
+        face_encodings = fr.face_encodings(image, face_locations)
+
+        # Lista para armazenar os resultados de verificação de cada rosto
+        results = []
+
+        # Itera por cada rosto detectado
+        for face_encoding, (top, right, bottom, left) in zip(face_encodings, face_locations):
+            # Encontra a melhor correspondência no JSON para o rosto detectado
+            best_match, best_distance = self.find_best_match(face_encoding, encoding_json)
+
+            # Verifica se a correspondência é válida e se o nível de confiança atende ao limiar especificado
+            if best_match and (1 - best_distance) * 100 >= trust_threshold:
+                confidence = int((1 - best_distance) * 100)  # Calcula o nível de confiança
+                # Anota o frame com as informações do rosto autenticado
+                self.annotate_frame(frame, top, right, bottom, left, best_match, confidence, True)
+                # Adiciona o resultado bem-sucedido à lista de resultados
+                results.append({"data": best_match, "auth": True, "confidence": confidence})
+            else:
+                # Caso a correspondência não seja válida
+                confidence = int((1 - best_distance) * 100) if best_match else 0
+                # Anota o frame com informações indicando falha na autenticação
+                self.annotate_frame(frame, top, right, bottom, left, "Unknown", confidence, False)
+                # Adiciona o resultado com falha à lista de resultados
+                results.append({"data": {}, "auth": False, "confidence": confidence})
+
+        # Retorna os resultados da verificação e o frame anotado
+        return {"message": "Verificação concluída.", "success": True, "results": results}, frame
+
+
+    def find_best_match(self, face_encoding, encoding_json):
+        """
+        Encontra a melhor correspondência para o encoding do rosto no JSON.
+
+        :param face_encoding: array - Encoding do rosto detectado.
+        :param encoding_json: list - Lista de encodings do JSON.
+        :return: tuple - Melhor correspondência e a menor distância calculada.
+        """
+        best_match = None  # Inicializa a melhor correspondência como None
+        best_distance = float('inf')  # Inicializa a menor distância como infinito
+
+        # Itera por cada entrada no JSON
+        for entry in encoding_json:
+            try:
+                # Converte o encoding do JSON de string para lista de floats
+                server_encoding = list(map(float, entry["encoding"].split(',')))
+                user_data = entry["data"]  # Dados associados ao rosto
+
+                # Calcula a distância entre o encoding detectado e o do JSON
+                distance = fr.face_distance([server_encoding], face_encoding)[0]
+                # Atualiza a menor distância e a melhor correspondência, se necessário
+                if distance < best_distance:
+                    best_distance = distance
+                    best_match = user_data
+            except Exception as e:
+                # Caso ocorra um erro, exibe uma mensagem e continua para a próxima entrada
+                print(f"Erro ao processar entrada do JSON: {str(e)}")
+                continue
+
+        return best_match, best_distance
+
+
+    def annotate_frame(self, frame, top, right, bottom, left, user_data, confidence, auth):
+        """
+        Anota o frame com informações de verificação de rosto.
+
+        :param frame: array - Imagem capturada da webcam.
+        :param top, right, bottom, left: int - Coordenadas do retângulo ao redor do rosto.
+        :param user_data: dict/str - Dados do usuário autenticado ou "Unknown".
+        :param confidence: int - Nível de confiança da autenticação.
+        :param auth: bool - Indica se a autenticação foi bem-sucedida.
+        """
+        # Define a cor do retângulo: verde para sucesso, vermelho para falha
+        color = (0, 255, 0) if auth else (0, 0, 255)
+        # Textos de autenticação, confiança e dados do usuário
+        text_auth = f'Auth: {"True" if auth else "False"}'
+        text_confidence = f'trust: {confidence} %' if auth else "Unknown"
+        text_data = f'Dados: {user_data}' if auth else "Unknown"
+
+        # Desenha o retângulo ao redor do rosto
+        cv2.rectangle(frame, (left, top), (right, bottom), color, 2)
+        # Adiciona o texto de autenticação
+        cv2.putText(frame, text_auth, (left, bottom + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        # Adiciona o texto do nível de confiança
+        cv2.putText(frame, text_confidence, (left, bottom + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        # Adiciona o texto dos dados do usuário, se autenticado
+        if auth:
+            cv2.putText(frame, text_data, (left, bottom + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)

@@ -1,3 +1,4 @@
+.gitignore
 /venv
 /exemplos/__pycache__
 /exemplos/static
@@ -11,3 +12,5 @@
 /exemplos/simples reconhecimento facial json/comandos.py
 /exemplos/simples reconhecimento facial json/__pycache__
 exemplos/simples reconhecimento facial retorno de imagem json/__pycache__
+exemplos produção/autenticação facial com json e flask
+exemplos produção/comandos.py

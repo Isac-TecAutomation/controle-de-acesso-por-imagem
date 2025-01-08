@@ -96,7 +96,7 @@ sudo apt update -y && sudo apt install -y \
 5. clone o arquivo `comandos.py`:
  
    ```bash
-   curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/comandos.py?token=GHSAT0AAAAAAC4DZWF2HW2BQVYK4FB5KFVUZ3TLGIA
+   curl -O https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/comandos.py?token=GHSAT0AAAAAAC4DZWF2HW2BQVYK4FB5KFVUZ3TLGIA](https://raw.githubusercontent.com/Isac-TecAutomation/controle-de-acesso-por-imagem-repositorio/refs/heads/main/comandos.py
    ```
 
 6. pronto! Agora basta seguir o passo a passo dos exemplos para poder usufruir da bibloteca

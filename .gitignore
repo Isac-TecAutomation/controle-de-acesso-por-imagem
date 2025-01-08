@@ -1,0 +1,26 @@
+# Ignorar a pasta venv
+/venv
+
+# Ignorar o cache Python
+**/__pycache__/
+
+# Ignorar pastas estáticas e de templates
+**/static/
+**/templates/
+
+# Ignorar arquivos e pastas específicas
+**/simples/
+**/comandos_original.py
+**/Dockerfile
+**/cabeçalho
+**/simples reconhecimento facial json/comandos.py
+**/simples reconhecimento facial json/__pycache__/
+**/simples reconhecimento facial retorno de imagem json/__pycache__/
+**/exemplos produção/simples autenticação facial com json e flask
+**/exemplos produção/comandos.py
+**/simples autenticação facial com json e flask/__pycache__/
+**/exemplos produção/
+**/exemplos/main.py
+
+# Ignorar arquivo específico
+/comando_001s.py

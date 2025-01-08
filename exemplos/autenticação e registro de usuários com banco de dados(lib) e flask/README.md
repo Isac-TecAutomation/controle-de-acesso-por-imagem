@@ -1,4 +1,4 @@
-# Exemplo: Autenticação e Registro de Usuários com Banco de Dados(lib)
+# Exemplo: Autenticação e Registro de Usuários com Banco de Dados(lib) e flask
 
 ## Descrição
 Este exemplo demonstra como integrar um banco de dados ao projeto para realizar **autenticação** e **registro de usuários** com base em reconhecimento facial. Ele serve como uma base para entender e implementar as funções disponíveis no arquivo `main.py`.

@@ -351,25 +351,23 @@ class Webcam:
         return verify(req)
 
 
+# Classe Commands: Contém comandos e lógica de autenticação, registro de usuários e dispositivos.
 class Commands:
-    def __init__(self, host_webcam=None, host_database=None, user_database=None, password=None, 
-                 database_name=None, image_column=None, other_columns=None, user_table=None, 
-                 device_table=None, mac_column=None, dir_archive_json=None):
+    def __init__(self, host_webcam, host_database, user_database, password, database_name,
+                 image_column, other_columns, user_table, device_table, mac_column):
         """
         Inicializa os parâmetros necessários para conectar à webcam e ao banco de dados.
-        :param host_webcam: Endereço ou índice da webcam (opcional).
-        :param host_database: Endereço do servidor de banco de dados (opcional).
-        :param user_database: Nome de usuário do banco de dados (opcional).
-        :param password: Senha do banco de dados (opcional).
-        :param database_name: Nome do banco de dados (opcional).
-        :param image_column: Nome da coluna de imagem no banco de dados (opcional).
-        :param other_columns: Outras colunas no banco de dados (opcional).
-        :param user_table: Tabela de usuários no banco de dados (opcional).
-        :param device_table: Tabela de dispositivos no banco de dados (opcional).
-        :param mac_column: Nome da coluna de MAC no banco de dados (opcional).
-        :param dir_archive_json:diretório para o arquivo json (opcional).
+        :param host_webcam: Endereço ou índice da webcam.
+        :param host_database: Endereço do servidor de banco de dados.
+        :param user_database: Nome de usuário do banco de dados.
+        :param password: Senha do banco de dados.
+        :param database_name: Nome do banco de dados.
+        :param image_column: Nome da coluna de imagem no banco de dados.
+        :param other_columns: Outras colunas no banco de dados.
+        :param user_table: Tabela de usuários no banco de dados.
+        :param device_table: Tabela de dispositivos no banco de dados.
+        :param mac_column: Nome da coluna de MAC no banco de dados.
         """
-       
         self.image_column = image_column
         self.other_columns = other_columns
         self.database_name = database_name
@@ -380,7 +378,6 @@ class Commands:
         self.password = password
         self.device_table = device_table
         self.mac_column = mac_column
-        self.dir_archive_json=dir_archive_json
 
     def load_data(self):
         """
@@ -542,7 +539,7 @@ class Commands:
             return {"success": False, "result": None, "message": f"Erro ao acessar o banco de dados: {str(e)}"}
     
 
-    def face_verify_json(self, trust_threshold):
+    def face_verify_json(self, trust_threshold, name_archive_encoding_json, key_encoding):
         webcam = Webcam(self.host_webcam)
         image_webcam = webcam.image()[0]
 
@@ -566,7 +563,7 @@ class Commands:
 
         # Carregar encodings armazenados no arquivo JSON
         try:
-            with open(self.dir_archive_json, 'r') as file:
+            with open(name_archive_encoding_json, 'r') as file:
                 data_json = json.load(file)
         except Exception as e:
             return {
@@ -586,12 +583,12 @@ class Commands:
             # Comparar com os encodings armazenados no JSON
             for data in data_json:
                 # Verificar se a chave com os encodings existe no JSON
-                if self.image_column not in data:
+                if key_encoding not in data:
                     continue
 
                 # Converter o valor da chave "encoding" de string para lista de floats
                 try:
-                    stored_encoding = list(map(float, data[self.image_column].split(',')))
+                    stored_encoding = list(map(float, data[key_encoding].split(',')))
                 except Exception as e:
                     overall_success = False
                     results.append({
@@ -653,7 +650,7 @@ class Commands:
 
 
     
-    def register_face_json(self, data_user_dict):
+    def register_face_json(self, name_archive_encoding_json, key_encoding, data_user_dict):
         webcam = Webcam(self.host_webcam)
         image_webcam = webcam.image()[0]
 
@@ -669,11 +666,11 @@ class Commands:
 
         # Converter encoding para string
         encoding_string = ','.join(map(str, face_encoding_webcam[0]))
-        data_user_dict[self.image_column] = encoding_string
+        data_user_dict[key_encoding] = encoding_string
 
         # Carregar dados existentes do arquivo JSON
         try:
-            with open(self.dir_archive_json, 'r') as file:
+            with open(name_archive_encoding_json, 'r') as file:
                 try:
                     data = json.load(file)
                 except (json.JSONDecodeError, ValueError):
@@ -690,7 +687,7 @@ class Commands:
 
         # Gravar os dados atualizados no arquivo JSON
         try:
-            with open(self.dir_archive_json, 'w') as file:
+            with open(name_archive_encoding_json, 'w') as file:
                 json.dump(data, file, indent=4)
             return True, 'Rosto registrado com sucesso'
         except Exception as e:

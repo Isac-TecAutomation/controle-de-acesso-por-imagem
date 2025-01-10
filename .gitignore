@@ -1,3 +1,4 @@
+
 # Ignorar a pasta venv
 /venv
 
@@ -17,11 +18,13 @@
 **/simples reconhecimento facial json/__pycache__/
 **/simples reconhecimento facial json retorno de imagem (base)/__pycache__/
 **/simples reconhecimento facial json retorno de imagem (lib)/__pycache__/
-**/exemplos produção/simples autenticação facial com json e flask
+**/outros outros exemplos produção/simples autenticação facial com json e flask
 **/exemplos produção/comandos.py
 **/simples autenticação facial com json e flask/__pycache__/
 **/exemplos produção/
-**/exemplos/main.py
+**/outros exemplos/main.py
+
 # Ignorar arquivo específico
 /comandos-1.0.1.py
 /comandos-1.0.3.py
+/.gitignore

@@ -1,0 +1,7 @@
+# para ele ignorar algumas pasta durante o build 
+
+**/outros exemplos
+**/exemplos produção
+
+**/comandos-1.0.1.py
+**/comandos-1.0.3.py

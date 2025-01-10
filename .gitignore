@@ -1,3 +1,4 @@
+.gitignore
 
 # Ignorar a pasta venv
 /venv
@@ -27,4 +28,5 @@
 # Ignorar arquivo específico
 /comandos-1.0.1.py
 /comandos-1.0.3.py
-/.gitignore
+
+/LICENSE

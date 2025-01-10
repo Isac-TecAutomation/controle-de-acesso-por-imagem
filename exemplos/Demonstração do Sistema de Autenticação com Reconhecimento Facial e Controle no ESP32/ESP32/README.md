@@ -15,7 +15,7 @@ Este projeto utiliza um botão para iniciar uma solicitação HTTP que verifica 
 
 - imagem do circuito exemplo:
 
-   ![CIRCUITO](exemplos/Demonstração do Sistema de Autenticação com Reconhecimento Facial e Controle no ESP32/ESP32/Exemplo do circuito com o esp32.png)
+   ![CIRCUITO](/exemplos/Demonstração do Sistema de Autenticação com Reconhecimento Facial e Controle no ESP32/ESP32/Exemplo do circuito com o esp32.png)
 
 
 

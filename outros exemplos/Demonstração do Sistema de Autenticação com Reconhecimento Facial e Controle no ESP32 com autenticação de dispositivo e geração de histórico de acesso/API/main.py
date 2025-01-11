@@ -10,12 +10,15 @@
 # DESCRIÇÃO: Este módulo cuida dos exemplos de demonstração de funcionamento dos arquivos.
 # ==============================================
 
+# Importação das bibliotecas necessárias para a criação da API web e manipulação de dados.
 # Flask para criar a API e funções para lidar com requisições HTTP.
 from flask import Flask, request, jsonify
 
-# Importação da classe Commands, que contém as funções principais do sistema.
+# Importação da classe Commands, que contém as funções principais do sistema de controle de acesso.
 from comandos import Commands
 import json
+
+
 
 # Inicializa o objeto de controle de acesso com as configurações específicas.
 control = Commands(
@@ -30,8 +33,19 @@ control = Commands(
     password='<senha do usuario do DB>'  # Senha do banco de dados. **Certifique-se de manter essa informação segura.**
 )
 
-# Criação da instância Flask para criar a aplicação web.
+# Criação da instância Flask para a aplicação web, que gerenciará as requisições e respostas HTTP.
 app = Flask(__name__)
+
+# ==============================================
+# variaveis Importantes !
+# ==============================================
+
+time_column = '<nome da coluna para o horario>'  # Nome da coluna com armazenamento do horário no historico
+date_column = '<nome da coluna para a data>' # Nome da coluna com armazenamento da data no historico
+timerzone = '<sua timerzone>' # Exemplo 'America/Belem'
+trust = 60   #nivel de confiança
+
+
 
 # ==============================================
 # Endpoint para verificação facial
@@ -47,30 +61,46 @@ def face_verify():
         JSON: Resultado da verificação facial contendo informações do usuário, caso identificado.
     """
     # Recebe os dados da requisição HTTP POST e faz o parsing para JSON.
-    req = request.get_data()
-    req = json.loads(req)
-
-    # Autentica o dispositivo utilizando o método authenticate_device.
-    auth_device = control.authenticate_device(req)
-
-    # Exibe no console o resultado da autenticação do dispositivo.
-    print(auth_device)
+    req = request.get_data()  # Recebe a requisição bruta.
+    req = json.loads(req)  # Converte os dados da requisição para formato JSON.
+    
+    # Filtra o JSON para remover o campo 'ip', que não é necessário para a verificação facial.
+    filter_json = {key: value for key, value in req.items() 
+                   if key != 'ip'}
+    
+    # Realiza a autenticação do dispositivo com base nos dados filtrados da requisição.
+    auth_device = control.authenticate_device(filter_json)
 
     # Verifica se o dispositivo foi autenticado com sucesso.
     if auth_device['Auth']:
-        # Define o nível de confiança para o reconhecimento facial.
-        trust = 60
 
-        # Chama a função face_verify_database com timeout de 60 segundos.
+        # Chama a função face_verify_database para comparar a face do usuário com os dados do banco de dados.
         result = control.face_verify_database(trust)
+     
+        for data_user in result:
+            # Se a verificação facial for bem-sucedida (Auth=True), o usuário foi identificado.
+            if data_user['Auth']:
+                 
+                # Filtra os dados do usuário para remover a senha e enviar apenas informações relevantes.
+                filter_json = {key: value for key, value in data_user['data'].items() 
+                   if key != 'senha'}
+                
+                # Adiciona o nível de confiança da verificação ao resultado.
+                filter_json['trust'] = data_user['trust']
 
-        # Exibe no console o resultado da verificação facial.
-        print(result)
-
-        # Retorna os resultados da verificação facial em formato JSON.
-        return jsonify(result)
+                # Salva o histórico de acesso do usuário no banco de dados.
+                save_historic = control.save_historic_data(filter_json,req, date_column, 
+                                                           time_column, timerzone)
+                
+                # Verifica se o salvamento do histórico foi bem-sucedido.
+                if not save_historic['sucess']:
+                    return jsonify(save_historic)  # Se falhar, retorna a mensagem de erro.
+        
+                else:
+                    print(save_historic['message'])  # Exibe a mensagem no console, indicando sucesso.
+                    return jsonify(result)  # Retorna o resultado da verificação facial como resposta em formato JSON.
     else:
-        # Retorna o resultado da autenticação do dispositivo em caso de falha.
+        # Se a autenticação do dispositivo falhar, retorna o erro da autenticação.
         return jsonify(auth_device)
 
 # ==============================================
@@ -88,13 +118,13 @@ def register_device():
     # Recebe os dados da requisição HTTP POST em formato JSON.
     req = request.get_json()
 
-    # Registra o dispositivo utilizando o método register_device.
+    # Registra o dispositivo no sistema utilizando o método register_device.
     results = control.register_device(req)
 
     # Exibe no console o resultado do registro do dispositivo.
     print(results)
 
-    # Retorna o resultado do registro em formato JSON.
+    # Retorna o resultado do registro do dispositivo em formato JSON para a resposta HTTP.
     return jsonify(results)
 
 # ==============================================

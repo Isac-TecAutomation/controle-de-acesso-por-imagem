@@ -663,6 +663,10 @@ class Commands:
             "results": results
         }
 
+
+
+
+    
     def register_face_json(self, data_user_dict):
         webcam = Webcam(self.host_webcam)
         image_webcam = webcam.image()[0]

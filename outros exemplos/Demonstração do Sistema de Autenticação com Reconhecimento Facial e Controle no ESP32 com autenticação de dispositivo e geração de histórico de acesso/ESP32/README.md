@@ -56,7 +56,8 @@ O sistema realiza autenticação baseada no endereço MAC do dispositivo. Cada d
 {
   "mac": "00:1A:2B:3C:4D:5E",
   "local": "casa",
-  "esp_id": "1234567890abcdef"
+  "esp_id": "1234567890abcdef",
+  "ip": "192.168.0.2"
 }
 ```
 

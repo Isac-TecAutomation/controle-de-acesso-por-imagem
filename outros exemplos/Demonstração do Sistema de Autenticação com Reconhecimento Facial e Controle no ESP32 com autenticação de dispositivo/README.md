@@ -1,4 +1,4 @@
-# Demonstração do Sistema de Autenticação com Reconhecimento Facial e Controle no ESP32
+# Demonstração do Sistema de Autenticação com Reconhecimento Facial e Controle no ESP32 com Autenticação de dispositivo
 
 ## Visão Geral
 

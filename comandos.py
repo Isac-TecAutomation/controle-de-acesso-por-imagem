@@ -368,7 +368,7 @@ class Webcam:
 class Commands:
     def __init__(self, host_webcam=None, host_database=None, user_database=None, password=None, 
                  database_name=None, image_column=None, other_columns=None, user_table=None, 
-                 device_table=None, dir_archive_json=None):
+                 device_table=None, historic_table=None, dir_archive_json=None):
         """
         Inicializa os parâmetros necessários para conectar à webcam e ao banco de dados.
         :param host_webcam: Endereço ou índice da webcam (opcional).
@@ -380,19 +380,23 @@ class Commands:
         :param other_columns: Outras colunas no banco de dados (opcional).
         :param user_table: Tabela de usuários no banco de dados (opcional).
         :param device_table: Tabela de dispositivos no banco de dados (opcional).
+        :param device_table: Tabela de histórico no banco de dados (opcional).
         :param dir_archive_json:diretório para o arquivo json (opcional).
         """
-       
-        self.image_column = image_column
-        self.other_columns = other_columns
-        self.database_name = database_name
-        self.host_database = host_database
-        self.user_database = user_database
-        self.host_webcam = host_webcam
-        self.user_table = user_table
-        self.password = password
-        self.device_table = device_table
-        self.dir_archive_json=dir_archive_json
+
+        self.dir_archive_json = dir_archive_json
+        self.historic_table   = historic_table
+        self.other_columns    = other_columns
+        self.database_name    = database_name
+        self.host_database    = host_database
+        self.user_database    = user_database
+        self.image_column     = image_column
+        self.device_table     = device_table
+        self.host_webcam      = host_webcam
+        self.user_table       = user_table
+        self.password         = password
+        
+
 
     def load_data(self):
         """
@@ -436,10 +440,10 @@ class Commands:
         for i in range(len(results[0])):
             if max(results[0]) == results[0][i]:
                 if results[0][i] >= trust:
-                    recognized_faces.append({'Dados do Usuario': user_data[i], 'trust': results[0][i],
+                    recognized_faces.append({'data': user_data[i], 'trust': results[0][i],
                                              'Auth': True})
                 else:
-                    recognized_faces.append({'Dados do Usuario': 'unknown', 'trust': results[0][i],
+                    recognized_faces.append({'data': 'unknown', 'trust': results[0][i],
                                              'Auth': False})
 
         if recognized_faces:
@@ -511,7 +515,7 @@ class Commands:
 
         return result(device_data)
 
-    def save_historic_data(self, user_data, device_data, table,
+    def save_historic_data(self, user_data, device_data,
                             date_column, time_column, timerzone):
         """
         Salva os dados históricos de autenticação no banco de dados.
@@ -525,7 +529,7 @@ class Commands:
         db = Database(host=self.host_database, user=self.user_database, password=self.password,
                       database=self.database_name)
 
-        save = db.save_historic(user_data, device_data, table, date_column, time_column, timerzone)
+        save = db.save_historic(user_data, device_data,self.historic_table,date_column, time_column, timerzone)
 
         return save
 
@@ -663,6 +667,10 @@ class Commands:
             "results": results
         }
 
+
+
+
+    
     def register_face_json(self, data_user_dict):
         webcam = Webcam(self.host_webcam)
         image_webcam = webcam.image()[0]

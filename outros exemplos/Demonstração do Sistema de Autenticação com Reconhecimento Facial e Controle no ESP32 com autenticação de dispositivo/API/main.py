@@ -20,14 +20,14 @@ import json
 # Inicializa o objeto de controle de acesso com as configurações específicas.
 control = Commands(
     host_webcam='http://192.168.0.20/800x600.jpg',  # Endereço da webcam para capturar frames usados no reconhecimento facial.
-    host_database='localhost',  # Endereço do servidor MySQL, geralmente "localhost" para bancos locais.
-    user_database='root',  # Nome de usuário usado para acessar o banco de dados.
-    password='Isac1998',  # Senha do banco de dados. **Certifique-se de manter essa informação segura.**
-    database_name='db_exemplo',  # Nome do banco de dados onde os dados de usuários estão armazenados.
-    image_column='imagem',  # Nome da coluna no banco de dados onde as imagens dos usuários estão armazenadas.
     other_columns=('email', 'nome', 'senha'),  # Outras colunas no banco de dados relevantes para a autenticação.
-    user_table='usuarios',  # Nome da tabela de usuários no banco de dados.
     device_table='dispositivos',  # Nome da tabela de dispositivos no banco de dados.
+    database_name='db_exemplo',  # Nome do banco de dados onde os dados de usuários estão armazenados.
+    host_database='localhost',  # Endereço do servidor MySQL, geralmente "localhost" para bancos locais.
+    user_table='usuarios',  # Nome da tabela de usuários no banco de dados.
+    image_column='imagem',  # Nome da coluna no banco de dados onde as imagens dos usuários estão armazenadas.
+    user_database='root',  # Nome de usuário usado para acessar o banco de dados.
+    password='Isac1998'  # Senha do banco de dados. **Certifique-se de manter essa informação segura.**
 )
 
 # Criação da instância Flask para criar a aplicação web.

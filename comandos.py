@@ -398,7 +398,7 @@ class Commands:
         
 
 
-    def load_data(self):
+    def load_data_users(self):
         """
         Carrega os dados do banco de dados, incluindo imagens e outras informações dos usuários.
         :return: Dados dos usuários (imagem e outras colunas).
@@ -421,7 +421,7 @@ class Commands:
         if not face_locate_webcam:
             return {'Auth': False, 'Error': 'Nenhum Rosto Detectado'}  # Retorna erro se não detectar rosto
 
-        data_users = self.load_data()  # Carrega os dados dos usuários
+        data_users = self.load_data_users()  # Carrega os dados dos usuários
 
         encoding_data = [encoding for encoding, _ in data_users]  # Coleta os encodings das faces
         user_data = [data for _, data in data_users]  # Coleta os dados associados aos usuários
@@ -559,6 +559,40 @@ class Commands:
             # Tratamento de exceções e falhas no processo
             return {"success": False, "result": None, "message": f"Erro ao acessar o banco de dados: {str(e)}"}
     
+    def get_database(self, image_column='', columns=(), table=''):
+        """
+        Recupera dados de uma tabela no banco de dados com base nos parâmetros fornecidos.
+
+        Esta função realiza uma consulta no banco de dados para recuperar informações de uma tabela específica. Ela permite especificar as colunas a serem recuperadas e uma coluna de imagem opcional. A consulta é realizada usando os parâmetros fornecidos e os dados recuperados são retornados.
+
+        :param image_column: Coluna de imagem (opcional). Se fornecida, essa coluna será incluída na consulta.
+        :param columns: Tupla contendo os nomes das colunas que devem ser recuperadas. Se vazio, todas as colunas são recuperadas.
+        :param table: Nome da tabela no banco de dados onde os dados serão recuperados.
+        
+        :return: Resultado da consulta no banco de dados. Pode retornar um conjunto de resultados (dados) ou um erro caso haja falha na consulta.
+        """
+        db = Database(host=self.host_database, user=self.user_database, password=self.password,
+                    database=self.database_name)
+        
+        # Executa a consulta no banco de dados utilizando o método get_database da instância db.
+        command = db.get_database(image_column, columns, table)
+
+        return command
+    
+
+    def load_table_html(self, data_json):
+        """PRODUÇÃO FUTURA"""
+        values_tables = lambda table_data: [list(d.values()) for d in table_data]
+        tables = {}
+
+        for table_name, columns in data_json.items():
+            table_data = self.get_database('', columns, table_name)
+            tables[table_name] = {
+                "columns": columns,
+                "data": values_tables(table_data)
+            }
+
+        return tables
 
     def face_verify_json(self, trust_threshold):
         webcam = Webcam(self.host_webcam)

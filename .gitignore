@@ -7,8 +7,8 @@
 **/__pycache__/
 
 # Ignorar pastas estáticas e de templates
-**/static/
-**/templates/
+**/outros exemplos/static
+**/outros exemplos/templates
 
 # Ignorar arquivos e pastas específicas
 **/simples/

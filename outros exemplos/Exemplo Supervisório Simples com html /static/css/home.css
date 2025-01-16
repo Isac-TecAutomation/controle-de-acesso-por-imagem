@@ -1,0 +1,133 @@
+/* Configurações gerais do container principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Organização das linhas principais */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Estilo das caixas menores */
+.small-box {
+    flex: 1;
+    max-width: 48%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo dos títulos */
+h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Configurações gerais das tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Estilo das células e cabeçalhos das tabelas */
+th,
+td {
+    padding: 5px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+/* Estilo dos botões e inputs de envio */
+button.small-button,
+input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.small-button:hover,
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo específico para os formulários */
+.form-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Espaçamento entre os campos */
+}
+
+/* Estilo para os inputs do formulário */
+.form-section input[type="text"],
+.form-section input[type="email"],
+.form-section select,
+.form-section input[type="password"] {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Botão específico do formulário */
+.form-section input[type="submit"] {
+    background-color: #28a745;
+}
+
+.form-section input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Configurações específicas para as tabelas e seções de tabela */
+.table-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 48%;
+    min-height: 300px;
+    /* Altura mínima */
+    padding: 10px;
+}
+
+.table-section table {
+    flex-grow: 1;
+    margin-top: 10px;
+}
+
+/* Ajustes de responsividade para telas menores */
+@media (max-width: 768px) {
+    .small-box {
+        max-width: 100%;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .table-section {
+        width: 100%;
+    }
+}

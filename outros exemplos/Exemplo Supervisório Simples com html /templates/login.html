@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Metadados essenciais para o funcionamento e apresentação da página -->
+    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a página para ser responsiva em dispositivos móveis -->
+    <title>Controle de Acesso por Imagem</title> <!-- Título exibido na aba do navegador -->
+
+    <!-- Importa a folha de estilos CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+    <!-- Container principal da página -->
+    <div>
+        <!-- Cabeçalho com o título da seção -->
+        <h1>LOGIN</h1>
+        <br>
+
+        <!-- Formulário de login -->
+        <form action="/login" method="post">
+            <!-- Campo para entrada do email -->
+            <label for="email">Email</label>
+            <p></p> <!-- Espaçamento entre os campos -->
+            <input type="email" name="email" id="email" required> <!-- Campo de entrada para email (obrigatório) -->
+
+            <p></p> <!-- Espaçamento entre os campos -->
+
+            <!-- Campo para entrada da senha -->
+            <label for="password">Senha</label>
+            <p></p> <!-- Espaçamento entre os campos -->
+            <input type="password" name="password" id="password" required> <!-- Campo de entrada para senha (obrigatório) -->
+
+            <p></p> <!-- Espaçamento entre os campos -->
+
+            <!-- Botão para enviar os dados do formulário -->
+            <input type="submit" value="Logar">
+        </form>
+    </div>
+    <br>
+
+    <!-- Script JavaScript para exibir mensagens de erro ou sucesso -->
+    <script>
+        // Obtém a mensagem passada pelo servidor e exibe como alerta, caso exista
+        const message = "{{ message | e }}";
+        if (message) {
+            alert(message); // Alerta com a mensagem recebida
+        }
+    </script>
+</body>
+
+</html>

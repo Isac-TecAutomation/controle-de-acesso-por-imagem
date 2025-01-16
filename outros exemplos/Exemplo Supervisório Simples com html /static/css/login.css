@@ -1,0 +1,76 @@
+/* Define o estilo do corpo da página */
+body {
+    font-family: Arial, sans-serif; /* Define a fonte padrão */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimento padrão */
+    display: flex; /* Define layout flexível */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    height: 100vh; /* Ocupa 100% da altura da viewport */
+    background-color: #e9ecef; /* Define uma cor de fundo suave */
+}
+
+/* Estiliza o container principal do formulário */
+div {
+    background-color: #ffffff; /* Fundo branco para contraste */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
+    padding: 30px; /* Espaçamento interno */
+    width: 100%; /* Ocupa 100% da largura disponível */
+    max-width: 400px; /* Define uma largura máxima */
+    text-align: center; /* Centraliza o texto */
+    border: 1px solid #ccc; /* Borda cinza clara */
+}
+
+/* Estilo para o título principal */
+h1 {
+    font-size: 26px; /* Tamanho da fonte maior */
+    color: #007bff; /* Azul vibrante */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+/* Estiliza os rótulos dos campos do formulário */
+label {
+    font-size: 14px; /* Tamanho da fonte menor */
+    font-weight: bold; /* Negrito para destaque */
+    color: #555; /* Cinza escuro para contraste */
+    display: block; /* Garante que ocupe a linha inteira */
+    text-align: left; /* Alinhamento à esquerda */
+    margin-bottom: 5px; /* Espaçamento inferior */
+}
+
+/* Estiliza os campos de entrada (email e senha) */
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Ocupa 100% da largura disponível */
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 15px; /* Espaçamento inferior */
+    border: 1px solid #ccc; /* Borda cinza clara */
+    border-radius: 5px; /* Cantos arredondados */
+    box-sizing: border-box; /* Inclui bordas e preenchimento no cálculo da largura */
+    font-size: 14px; /* Define o tamanho da fonte */
+}
+
+/* Estiliza o botão de envio (login) */
+input[type="submit"] {
+    background-color: #007bff; /* Azul vibrante */
+    color: #fff; /* Texto branco */
+    font-size: 16px; /* Tamanho da fonte */
+    padding: 10px; /* Espaçamento interno */
+    border: none; /* Remove bordas padrão */
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer; /* Mostra o cursor de "mãozinha" */
+    width: 100%; /* Ocupa toda a largura disponível */
+}
+
+/* Estiliza o botão ao passar o mouse */
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Azul mais escuro para destaque */
+}
+
+/* Estilo para mensagens de alerta */
+.alert-message {
+    margin-top: 20px; /* Espaçamento superior */
+    font-size: 14px; /* Tamanho da fonte */
+    color: red; /* Texto vermelho para chamar atenção */
+}

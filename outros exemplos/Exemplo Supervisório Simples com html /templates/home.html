@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Metadados essenciais para a página -->
+    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para a responsividade -->
+    <title>Página Admin</title> <!-- Título da página -->
+
+    <!-- Importação do arquivo CSS para estilização -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Seção principal contendo a área de Cadastro e a Tabela de Usuários -->
+        <div class="row">
+            <!-- Área de Cadastro de Usuários -->
+            <div class="form-section small-box">
+                <h1>Cadastro de Novo Usuário</h1>
+                <form action="/register_user" method="post">
+                    <!-- Campo para inserir o nome do usuário -->
+                    <label for="label_name">Nome</label>
+                    <input type="text" name="nome" id="label_name" required>
+
+                    <!-- Campo para inserir o e-mail do usuário -->
+                    <label for="label_email">E-mail</label>
+                    <input type="email" name="email" id="label_email" required>
+
+                    <!-- Campo para inserir a senha do usuário -->
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" required>
+
+                    <!-- Botão para enviar o formulário -->
+                    <input type="submit" value="Cadastrar Usuário">
+                </form>
+                <br>
+
+                <!-- Formulário para recarregar a tabela de usuários -->
+                <form action="/tables" method="post">
+                    <button class="small-button">Recarregar Tabela</button>
+                </form>
+            </div>
+
+            <!-- Tabela exibindo os usuários cadastrados -->
+            <div class="table-section small-box">
+                <h1>Usuários Atuais</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- Cabeçalho da tabela de usuários (preenchido dinamicamente) -->
+                            {% for header in column_names_users %}
+                            <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas da tabela de usuários (preenchidas dinamicamente) -->
+                        {% for row in data_table_users %}
+                        <tr>
+                            {% for cell in row %}
+                            <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Segunda seção: Histórico de Acessos e Dispositivos Registrados -->
+        <div class="row">
+            <!-- Tabela de Histórico de Acessos -->
+            <div class="table-section small-box">
+                <h1>Histórico de Acessos</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- Cabeçalho da tabela de histórico de acessos -->
+                            {% for header in column_names_historic %}
+                            <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas da tabela de histórico de acessos -->
+                        {% for row in data_table_historic %}
+                        <tr>
+                            {% for cell in row %}
+                            <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabela de Dispositivos Registrados -->
+            <div class="table-section small-box">
+                <h1>Dispositivos Registrados</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- Cabeçalho da tabela de dispositivos -->
+                            {% for header in column_names_device %}
+                            <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas da tabela de dispositivos -->
+                        {% for row in data_table_device %}
+                        <tr>
+                            {% for cell in row %}
+                            <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JavaScript para exibir mensagens -->
+    <script>
+        // Exibe uma mensagem de alerta se a variável 'message' estiver definida
+        var mensagem = "{{ message }}";
+        if (mensagem) alert(mensagem);
+    </script>
+</body>
+
+</html>

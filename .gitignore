@@ -1,4 +1,5 @@
 .gitignore
+.dockerignore
 
 # Ignorar a pasta venv
 /venv

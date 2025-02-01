@@ -16,10 +16,9 @@ import cv2  # OpenCV, usado para exibir e processar imagens.
 
 # Inicializa o objeto de controle de acesso com as configurações específicas.
 control = Commands(
-    host_webcam='http://192.168.0.20/800x600.jpg',  # Endereço da webcam. Substituir pelo endereço da sua webcam.
+    host_webcam='<host da sua webcam>',  # Endereço da webcam. Substituir pelo endereço da sua webcam.
     image_column='encoding',  # Nome da coluna no JSON que contém os encodings faciais registrados.
-    dir_archive_json='exemplos produção/simples reconhecimento facial json/dados.json' 
-    # Caminho do arquivo JSON que contém os dados de encodings faciais e informações dos usuários.
+    dir_archive_json='<diretório do arquivo json>'  # Caminho do arquivo JSON que contém os dados de encodings faciais e informações dos usuários.
 )
 
 # Parte principal do código - Executa o programa

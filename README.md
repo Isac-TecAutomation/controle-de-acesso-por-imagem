@@ -100,3 +100,9 @@ sudo apt update -y && sudo apt install -y \
    ```
 
 6. pronto! Agora basta seguir o passo a passo dos exemplos para poder usufruir da bibloteca
+
+
+7. Créditos:
+
+   - https://github.com/ageitgey/face_recognition
+

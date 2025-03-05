@@ -2,7 +2,7 @@
 .dockerignore
 
 # Ignorar a pasta venv
-/venv
+/.venv
 
 # Ignorar o cache Python
 **/__pycache__/
